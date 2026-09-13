@@ -108,12 +108,12 @@ RUN echo "Setting up and installing packages"; \
 
 RUN echo "Setting up dev system"; \
   if [ -f "/usr/local/bin/pkmgr" ] ; then rm -Rf "/usr/local/bin/pkmgr"; fi; \
-  bash -c "$(curl -q -LSsf "https://github.com/casjay-base/centos/raw/main/root/.local/bin/fetch-repo-file")"; \
+  bash -c "$(curl -q -LSsf "https://github.com/casjay-base/rhel/raw/main/root/.local/bin/fetch-repo-file")"; \
   [ ! -d  "/usr/local/share/CasjaysDev/scripts" ] && \
   git clone -q https://github.com/casjay-dotfiles/scripts "/usr/local/share/CasjaysDev/scripts" && \
   /usr/local/share/CasjaysDev/scripts/install.sh; \
   dnf module -y reset php;dnf module -y install php:remi-$PHP_VERSION; \
-  pkg="$(curl -q -LSsf "https://github.com/pkmgr/centos/raw/main/lists/development.list")"; \
+  pkg="$(curl -q -LSsf "https://github.com/pkmgr/rhel/raw/main/lists/development.list")"; \
   [ -n "$pkg" ] && yum install -yy --skip-broken "$pkg"
 
 RUN echo "Initializing packages before copying files to image"; \

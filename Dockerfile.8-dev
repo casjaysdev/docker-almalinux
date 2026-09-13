@@ -114,7 +114,7 @@ RUN echo "Initializing packages before copying files to image"; \
 RUN echo "Setting up dev system"; \
   if [ -f "/usr/local/bin/pkmgr" ] ; then rm -Rf "/usr/local/bin/pkmgr"; fi; \
   rm -f /etc/yum.repos.d/*crb*.repo 2>/dev/null || true; \
-  bash -c "$(curl -q -LSsf "https://github.com/casjay-base/centos/raw/main/root/.local/bin/fetch-repo-file")"; \
+  bash -c "$(curl -q -LSsf "https://github.com/casjay-base/rhel/raw/main/root/.local/bin/fetch-repo-file")"; \
   sed -i 's|/crb|/powertools|Ig; s|\[casjay-os-crb\]|[casjay-os-powertools]|g; s|AlmaLinux CRB|AlmaLinux PowerTools|g' /etc/yum.repos.d/*.repo 2>/dev/null || true; \
   rm -f /etc/yum.repos.d/*crb*.repo 2>/dev/null || true; \
   dnf clean all 2>/dev/null || true; \
@@ -122,7 +122,7 @@ RUN echo "Setting up dev system"; \
   git clone -q https://github.com/casjay-dotfiles/scripts "/usr/local/share/CasjaysDev/scripts" && \
   /usr/local/share/CasjaysDev/scripts/install.sh; \
   dnf module -y reset php;dnf module -y install php:remi-$PHP_VERSION; \
-  pkg="$(curl -q -LSsf "https://github.com/pkmgr/centos/raw/main/lists/development.list")"; \
+  pkg="$(curl -q -LSsf "https://github.com/pkmgr/rhel/raw/main/lists/development.list")"; \
   [ -n "$pkg" ] && yum install -yy --skip-broken "$pkg"
 
 COPY ./rootfs/. /
